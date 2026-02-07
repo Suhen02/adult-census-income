@@ -6,6 +6,7 @@ from src.logger import logging
 import numpy as np 
 import pandas as pd
 from dataclasses import dataclass
+from src.components.data_cleaning import DataCleaning
 
 
 @dataclass 
@@ -33,5 +34,9 @@ class DataIngestion:
         
 if __name__=='__main__':
     obj=DataIngestion()
-    raw_data=obj.initiate_data_ingestion()
-    print(raw_data)        
+    raw_data_path=obj.initiate_data_ingestion()
+    data_clean=DataCleaning(raw_data_path)
+    train_path,test_path=data_clean.initiate_data_cleaning()
+    print(train_path,test_path)
+
+            
