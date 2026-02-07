@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from dataclasses import dataclass
 from src.components.data_cleaning import DataCleaning
+from src.components.data_transformation import DataTransformation
 
 
 @dataclass 
@@ -37,6 +38,9 @@ if __name__=='__main__':
     raw_data_path=obj.initiate_data_ingestion()
     data_clean=DataCleaning(raw_data_path)
     train_path,test_path=data_clean.initiate_data_cleaning()
-    print(train_path,test_path)
+    data_tranform=DataTransformation()
+    train_arr,test_arr,path=data_tranform.initiate_data_transformation(train_path,test_path)
+    print(path)
+    
 
             
