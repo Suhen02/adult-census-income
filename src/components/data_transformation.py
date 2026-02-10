@@ -10,6 +10,7 @@ from sklearn.preprocessing import OneHotEncoder,StandardScaler
 from sklearn.pipeline import Pipeline
 from dataclasses import dataclass
 from src.utils import save_object
+from sklearn.impute import SimpleImputer
 
 
 @dataclass
@@ -39,6 +40,7 @@ class DataTransformation:
             
             num_pipeline=Pipeline(
                 steps=[
+                    ('impute',SimpleImputer()),
                     ('scaler',StandardScaler())
                 ]
             )
@@ -69,6 +71,7 @@ class DataTransformation:
 
             train_df=pd.read_csv(train_path)
             test_df=pd.read_csv(test_path)
+            print(f"[dataloaded] shape1:{train_df.shape} and shape2:{test_df.shape}")
             logging.info('Data read successfully')
 
             preprocessor=self.get_data_transformer_object()
@@ -81,16 +84,23 @@ class DataTransformation:
             input_features_test_df=test_df.drop(columns=[target_column])
             target_feature_test_df=np.array(test_df[target_column]).reshape(-1,1)
 
+            print(f"[saparate target] shape1:{input_features_train_df.shape} and shape2:{input_features_test_df.shape}")
+
             train_feature_arr=preprocessor.fit_transform(input_features_train_df)
             test_feature_arr=preprocessor.fit_transform(input_features_test_df)
 
             logging.info('Preprocessing completed')
+            print(f"[after preprocessing] shape1:{train_feature_arr.shape} and shape2:{test_feature_arr.shape}")
 
             train_feature_arr = train_feature_arr.toarray()
             test_feature_arr=test_feature_arr.toarray()
 
+            #print(f"before shape1:{train_feature_arr.s)} and shape2:{test_feature_arr}")
+ 
             train_arr=np.concat([train_feature_arr,target_feature_train_df],axis=1)
             test_arr=np.concat([test_feature_arr,target_feature_test_df],axis=1)
+
+            
 
             logging.info('Data is concated')
 

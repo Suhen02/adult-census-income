@@ -37,11 +37,13 @@ class DataCleaning:
 
             logging.info('Data splitting initiated')
 
-            train_set,test_set=train_test_split(balanced_data,test_size=0.2,random_state=42)
+            train_set,test_set=train_test_split(balanced_data,test_size=0.4,random_state=42)
 
             os.makedirs(os.path.dirname(self.data_cleaning_config.train_data_path),exist_ok=True)
             train_set.to_csv(self.data_cleaning_config.train_data_path,index=False,header=True)
             test_set.to_csv(self.data_cleaning_config.test_data_path,header=True,index=False)
+
+    
 
             logging.info('Data cleaning completed!')
 
