@@ -16,13 +16,14 @@ class DataIngestionConfig:
     raw_data_path:str=os.path.join('artifact','data.csv')
 
 class DataIngestion:
-    def __init__(self):
+    def __init__(self,data_path):
         self.ingestion_config=DataIngestionConfig()
+        self.data_path=data_path
 
     def initiate_data_ingestion(self):
         logging.info('Entred the data ingestion method')
         try:
-            df=pd.read_csv('notebook/data/adult.csv')
+            df=pd.read_csv(self.data_path)
             logging.info('Read the dataset as dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path),exist_ok=True)
@@ -34,18 +35,8 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e,sys)
         
-if __name__=='__main__':
-    obj=DataIngestion()
-    raw_data_path=obj.initiate_data_ingestion()
 
-    data_clean=DataCleaning(raw_data_path)
-    train_path,test_path=data_clean.initiate_data_cleaning()
 
-    data_tranform=DataTransformation()
-    train_arr,test_arr,path=data_tranform.initiate_data_transformation(train_path,test_path)
-    print(train_arr.shape,test_arr.shape)
-    trainer_=ModelTrainer()
-    best_score,best_model_name=trainer_.initiate_model_trainer(train_arr,test_arr)
     
     
 
