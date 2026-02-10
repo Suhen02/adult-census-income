@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adult Census Income Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Adult Census Income Form</h2>
+        <form action="/predict" method="POST">
+            <label for="age">Age</label>
+            <input type="number" name="age" required>
+
+            <label for="education.num">Education Number</label>
+            <input type="number" name="education.num" required>
+
+            <label for="capital.gain">Capital Gain</label>
+            <input type="number" name="capital.gain" required>
+
+            <label for="capital.loss">Capital Loss</label>
+            <input type="number" name="capital.loss" required>
+
+            <label for="hours.per.week">Hours per Week</label>
+            <input type="number" name="hours.per.week" required>
+
+            <label for="workclass">Workclass</label>
+            <input type="text" name="workclass" required>
+
+            <label for="education">Education</label>
+            <input type="text" name="education" required>
+
+            <label for="marital.status">Marital Status</label>
+            <input type="text" name="marital.status" required>
+
+            <label for="occupation">Occupation</label>
+            <input type="text" name="occupation" required>
+
+            <label for="relationship">Relationship</label>
+            <input type="text" name="relationship" required>
+
+            <label for="sex">Sex</label>
+            <select name="sex" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="native.country">Native Country</label>
+            <input type="text" name="native.country" required>
+
+            <button type="submit">Predict Income</button>
+        </form>
+    </div>
+</body>
+</html>
